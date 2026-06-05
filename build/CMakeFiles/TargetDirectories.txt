@@ -1,0 +1,3 @@
+C:/Users/kyleo/dev/ring-buffer/build/CMakeFiles/RingBuffer.dir
+C:/Users/kyleo/dev/ring-buffer/build/CMakeFiles/edit_cache.dir
+C:/Users/kyleo/dev/ring-buffer/build/CMakeFiles/rebuild_cache.dir

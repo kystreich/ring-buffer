@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/kyleo/dev/ring-buffer/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  -IC:\\Users\\kyleo\\dev\\ring-buffer -std=c++23 -o CMakeFiles\\RingBuffer.dir\\src\\main.cpp.obj -c C:\\Users\\kyleo\\dev\\ring-buffer\\src\\main.cpp",
+  "file": "C:/Users/kyleo/dev/ring-buffer/src/main.cpp",
+  "output": "CMakeFiles/RingBuffer.dir/src/main.cpp.obj"
+}
+]
