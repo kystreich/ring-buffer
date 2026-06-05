@@ -6,4 +6,5 @@ There are optimizations you can do - but they're a bit out of my depth. See reso
 
 Cool stuff:
 [Quant.Engineering | Ring Buffers](https://quant.engineering/ring-buffers-101.html)
+
 [Erik Rigtorp | Optimizing Ring buffers](https://rigtorp.se/ringbuffer/)
