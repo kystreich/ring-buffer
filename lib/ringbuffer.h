@@ -1,6 +1,7 @@
 #include <array>
 #include <atomic>
 #include <cstddef>
+#include <new>
 
 namespace ringbuffer {
 	template <auto V>
@@ -9,13 +10,13 @@ namespace ringbuffer {
 	template <typename T, size_t cap> 
 		requires powerOfTwo<cap>
 	struct RingBuffer {
-		std::atomic<size_t> producerPointer_{};
-		std::atomic<size_t> consumerPointer_{};
+		alignas(std::hardware_destructive_interference_size) std::atomic<size_t> producerPointer_{};
+		alignas(std::hardware_destructive_interference_size) std::atomic<size_t> consumerPointer_{};
 		std::array<T, cap> data_{};
 		
-		size_t capacity() {
+		[[nodiscard]] size_t capacity() const {
 			return cap;
-		};
+		};	
 
 		bool pop(T* output) {
 			if (consumerPointer_ == producerPointer_) return false;

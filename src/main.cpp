@@ -1,29 +1,32 @@
+#include <cstdint>
 #include <iostream>
 #include "lib/ringbuffer.h"
 
 using namespace ringbuffer;
 
 int main() {
-	RingBuffer<int, 128> rBuff{};
+	RingBuffer<std::int8_t, 2> rBuff{};
 
 	rBuff.push(1);
 	rBuff.push(2);
-	rBuff.push(3);
 	rBuff.push(4);
 	rBuff.push(5);
 
-	int x{};
+	std::int8_t x{};
 	rBuff.pop(&x);
-	int y{};
+	std::int8_t y{};
 	rBuff.pop(&y);
-	int z{};
+	std::int8_t z{};
 	rBuff.pop(&z);
-	int a{};
+	std::int8_t a{};
 	rBuff.pop(&a);
-	int b{};
+	std::int8_t b{};
 	rBuff.pop(&b);
 
-	std::cout << x << y << z << a << b << "\n";
+	auto cap = rBuff.capacity();
 
+	std::cout << 
+		std::format("X: {}\nY: {}\nZ: {}\nA: {}\nB: {}\nCapacity: {}\nSize Of Buffer: {}\nSize Of size_t: {}", x, y, z, a, b, cap, sizeof(rBuff), sizeof(size_t)) << "\n";
+	
 	return 0;
 }
