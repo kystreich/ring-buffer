@@ -13,15 +13,15 @@ int main() {
 	rBuff.push(5);
 
 	std::int8_t x{};
-	rBuff.pop(&x);
+	rBuff.pop(x);
 	std::int8_t y{};
-	rBuff.pop(&y);
+	rBuff.pop(y);
 	std::int8_t z{};
-	rBuff.pop(&z);
+	rBuff.pop(z);
 	std::int8_t a{};
-	rBuff.pop(&a);
+	rBuff.pop(a);
 	std::int8_t b{};
-	rBuff.pop(&b);
+	rBuff.pop(b);
 
 	auto cap = rBuff.capacity();
 
