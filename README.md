@@ -10,3 +10,5 @@ Cool stuff:
 [Quant.Engineering | Ring Buffers](https://quant.engineering/ring-buffers-101.html)
 
 [Erik Rigtorp | Optimizing Ring buffers](https://rigtorp.se/ringbuffer/)
+
+[Linux Kernel Docs | False Sharing](https://docs.kernel.org/kernel-hacking/false-sharing.html)
