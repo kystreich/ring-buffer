@@ -22,17 +22,17 @@ namespace ringbuffer {
 			return producerPointer_ == consumerPointer_;
 		}
 
-		bool pop(T* output) {
+		bool pop(T& output) {
 			const auto currentConsumer = consumerPointer_.load(std::memory_order_relaxed);
 			if (currentConsumer == producerPointer_.load(std::memory_order_acquire)) return false;
 
-			*output = data_[consumerPointer_];
+			output = std::move(data_[currentConsumer]);
 
 			consumerPointer_.store((consumerPointer_ + 1) & (cap - 1), std::memory_order_release);
 			return true;
 		};
 
-		bool push(T input) {
+		bool push(T& input) {
 			const auto currentProducer = producerPointer_.load(std::memory_order_relaxed);
 
 			size_t step = (currentProducer + 1) & (cap - 1);
