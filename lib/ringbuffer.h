@@ -13,26 +13,33 @@ namespace ringbuffer {
 		alignas(std::hardware_destructive_interference_size) std::atomic<size_t> producerPointer_{};
 		alignas(std::hardware_destructive_interference_size) std::atomic<size_t> consumerPointer_{};
 		std::array<T, cap> data_{};
-		
+	
 		[[nodiscard]] size_t capacity() const {
 			return cap;
-		};	
+		};
+
+		[[nodiscard]] bool empty() const {
+			return producerPointer_ == consumerPointer_;
+		}
 
 		bool pop(T* output) {
-			if (consumerPointer_ == producerPointer_) return false;
+			const auto currentConsumer = consumerPointer_.load(std::memory_order_relaxed);
+			if (currentConsumer == producerPointer_.load(std::memory_order_acquire)) return false;
 
 			*output = data_[consumerPointer_];
 
-			consumerPointer_ = (consumerPointer_ + 1) & (cap - 1);
+			consumerPointer_.store((consumerPointer_ + 1) & (cap - 1), std::memory_order_release);
 			return true;
 		};
 
 		bool push(T input) {
-			size_t step = (producerPointer_ + 1) & (cap - 1);
-			if (step == consumerPointer_) return false;
+			const auto currentProducer = producerPointer_.load(std::memory_order_relaxed);
+
+			size_t step = (currentProducer + 1) & (cap - 1);
+			if (step == consumerPointer_.load(std::memory_order_acquire)) return false;
 			
-			data_[producerPointer_] = input;
-			producerPointer_ = step;
+			data_[currentProducer] = input;
+			producerPointer_.store(step, std::memory_order_release);
 
 			return true;
 		};

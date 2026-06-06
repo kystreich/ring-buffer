@@ -5,7 +5,7 @@
 using namespace ringbuffer;
 
 int main() {
-	RingBuffer<std::int8_t, 2> rBuff{};
+	RingBuffer<std::int8_t, 128> rBuff{};
 
 	rBuff.push(1);
 	rBuff.push(2);
